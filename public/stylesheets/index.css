@@ -1,0 +1,236 @@
+@charset "utf-8";
+/* CSS Document */
+body, div, dl, dt, dd, ul, ol, li, h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td {
+	margin:0;
+	padding:0;
+}
+*{ font-family:"微软雅黑"}
+/*-----------------*/
+p{
+	cursor:default;}
+h1,h2,h3,h4,h5,h6{
+	cursor:default;
+	font-size:100%;
+	font-weight:normal;}
+img{ margin:0; padding:0}
+/*-----------------*/
+input[type="submit"],input[type="button"]{
+	cursor:pointer;}
+ul, ol {
+	list-style:none;}
+/*-----------------*/
+address, caption,cite,code,dfn,em,th,var {
+	font-style:normal;
+	font-weight:normal;}
+/*-----------------*/
+table {
+	border-collapse:collapse;
+	border-spacing:0;}
+/*-----------------*/
+fieldset, img {
+	border:0;}
+/*-----------------*/
+caption,th {
+	text-align:left;}
+/*-----------------*/
+q:before, q:after {
+	content:'';}
+/*-----------------*/
+a {
+	text-decoration:none;
+	color:#FFF;}
+a:hover {
+	text-decoration:none;}
+
+*:focus{
+	outline:none;}	
+html,body{
+	height:100%;}
+	
+/*------------------- index start--------------------*/
+.bac{
+	background-color: #FFFFFF;
+	background-size:cover;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.bacs{
+	background-image: url(../img/setup00.png) !important;
+}
+.back{
+	background-image: url(../img/setup001.png) !important;
+}
+.backs{
+	background-image: url(../img/setdown.png) !important;
+	background-size:100% 100%;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+
+.bac>h2{
+	width: 80%;
+	display: block;
+	margin: 0 auto;
+	padding-top: 20px;
+	font-size: 16px;
+	text-align: center;
+}
+.bac>h2 b{
+	display: block;
+	padding-bottom: 10px;
+	width: 100%;
+	font-weight: lighter !important;
+	font-size: 20px;
+	line-height: 28px; 
+	color: #DD524D;
+	border-bottom: #DD524D solid 1px;
+}
+
+.bac ul{
+	width:80%;
+	height: 470px;
+	overflow: auto;
+	margin: 0 auto;
+	padding: 14px 0px 0px 0px;
+}
+.bac ul li{
+	margin-bottom: 12px;
+}
+.bac ul li dl dt{
+	font-size: 18px;
+	margin-bottom: 8px;
+	padding-bottom: 8px;
+	box-sizing: border-box;
+	border-bottom: #EFEFF4 solid 1px;
+}
+.bac ul li dl dd div label{
+	margin-top: -2px;
+	font-size: 14px;
+	color: #797979;
+}
+.bac button{
+	width: 80%;
+	display: block;
+	margin: 0 auto;
+	margin-top: 18px;
+	font-size: 20px;
+	font-weight: lighter;
+	text-align: center;
+}
+.disline p{
+	background-color:#979797;
+	border-bottom:#fff solid 1px;
+	margin-bottom:6px;
+	padding:6px;
+	color:#FFFFFF;
+	box-sizing:border-box;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
