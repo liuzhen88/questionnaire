@@ -53,7 +53,6 @@ $(function(){
 			cb(data);
 		},
 		sendResult:function(data){
-			console.log(data);
 			$.ajax({
 				url:'http://120.25.152.42:9000/users/saveQuestionnaire',
 				type:'post',
