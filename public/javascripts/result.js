@@ -1,21 +1,36 @@
 $(function(){
-	var main = document.getElementById('main');
-	var main1 = document.getElementById('main1');
 	var widths = document.body.clientWidth*.8;
-	$("#main,#main1").css({width:widths});
-	$("#main,#main1").css({height:widths});	
-	var myChart = echarts.init(main);
-	var myChart1 = echarts.init(main1);
+	$(".many,.single").css({width:widths});
+	$(".many,.single").css({height:widths});	
 
-	drawTool(myChart,['选项1','选项2','选项3','选项4','选项5'],'问题1',
-		[
-						{value:335, name:'选项1'},//option可以公用，这边需要传回来选项名称，和选的个数
-						{value:310, name:'选项2'},
-						{value:234, name:'选项3'},
-						{value:135, name:'选项4'},
-						{value:1548, name:'选项5'}
-					]
-					);
+	$.ajax({
+		url:'http://120.25.152.42:9000/users/countQuestionResult',
+		type:'get',
+		dataType:'json',
+		success:function(data){
+			var data = data.data;
+			$('.many').each(function(index,value){
+				var main = document.getElementById('main'+index);
+				var charts = echarts.init(main);
+				drawTool(
+					charts,
+					data.selectMany[index].selects,
+					data.selectMany[index].title,
+					data.selectMany[index].data
+				)
+			});
+			$('.single').each(function(index,value){
+				var main = document.getElementById('single'+index);
+				var charts = echarts.init(main);
+				drawTool(
+					charts,
+					data.selectSingle[index].selects,
+					data.selectSingle[index].title,
+					data.selectSingle[index].data
+				)
+			});
+		}
+	});
 
 	function drawTool(element, legend, name, data){
 		var option = {

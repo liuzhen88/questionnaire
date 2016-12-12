@@ -3,22 +3,26 @@ extends layout
 block content
 	h2
 		b 问卷结果
-	ul
-		li
-			dl
-				dt 1.多选框样式
-				dd
-					div#main
-		li
-			dl
-				dt 1.单选框样式
-				dd
-					div#main1
-		li
-			dl
-				dt 1.问卷回答text文本
-				dd.disline
-					p 11111111
+	ul#content
+		- for(var i=0;i<data.selectMany.length;i++)
+			li
+				dl
+					dt #{data.selectMany[i].title}
+					dd
+						<div id='main#{i}' class='many'></div>
+		- for(var i=0;i<data.selectSingle.length;i++)
+			li
+				dl
+					dt #{data.selectSingle[i].title}
+					dd
+						<div id='single#{i}' class='single'></div>
+		- for(var i=0;i<data.selectContent.length;i++)
+			li
+				dl
+					dt #{data.selectContent[i].title}
+					dd.disline
+						- for(var j=0;j<data.selectContent[i].data.length;j++)
+							p #{data.selectContent[i].data[j]}
 	script(src='/javascripts/mui.min.js')
 	script(src='/javascripts/jquery.js')
 	script(src='/javascripts/echarts.common.min.js')

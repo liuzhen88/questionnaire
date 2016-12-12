@@ -38,7 +38,9 @@ module.exports = {
 				name:'select_many',
 				data:{
 					title:value.title,
-					answer:value.answer
+					answer:value.answer,
+					total:value.total,
+					selects:value.selects
 				},
 				time:new Date().getTime()
 			});
@@ -61,7 +63,9 @@ module.exports = {
 				name:'select_single',
 				data:{
 					title:value.title,
-					answer:value.answer
+					answer:value.answer,
+					total:value.total,
+					selects:value.selects
 				},
 				time:new Date().getTime()
 			});
@@ -155,7 +159,7 @@ module.exports = {
 		.then(function(result){
 			var context = config.data.success;
 			context.data = result;
-			deferred.resolve(result);
+			deferred.resolve(context);
 		})
 		.fail(function(err){
 			deferred.reject(err);
@@ -168,56 +172,119 @@ module.exports = {
 		var selectMany = data.selectManyData;
 		var selectSingle = data.selectSingleData;
 		var selectContent = data.selectContentData;
-		var selectManyTitle = [];
-		var selectSingleTitle = [];
-		var selectContentTitle = [];
-		selectMany.forEach(function(value,index){
-			selectManyTitle.push(value.data.title);
-		});
-		selectManyTitle = _.uniq(selectManyTitle);
 
-		selectSingle.forEach(function(value,index){
-			selectSingleTitle.push(value.data.title);
-		});
-		selectSingleTitle = _.uniq(selectSingleTitle);
+		var result = {
+			selectMany:[],
+			selectSingle:[],
+			selectContent:[]
+		};
 
-		selectContent.forEach(function(value,index){
-			selectContentTitle.push(value.data.title);
-		});
-		selectContentTitle = _.uniq(selectContentTitle);
+		var smTitle = [];
+		selectMany.forEach(function(v){
+			smTitle.push(v.data.title);
+		});	
+		smTitle = _.uniq(smTitle);
 
-		var result = {};
-		var smArr = [];
-		selectManyTitle.forEach(function(value,index){
+		var sm = [];
+		smTitle.forEach(function(value){
 			var obj = {
 				title:value,
-				options:[]
-			};
+				selects:[],
+				data:[]
+			}
+			for(var i=0;i<selectMany.length;i++){
+				if(value == selectMany[i].data.title){
+					obj.selects = selectMany[i].data.selects;
+					obj.selects.forEach(function(vv){
+						obj.data.push({
+							name:vv,
+							value:0
+						});
+					});
+					sm.push(obj);
+					break;
+				}
+			}
+		});
+
+		sm.forEach(function(value,index){
 			selectMany.forEach(function(values,indexs){
-				if(obj.title == values.data.title){
-					values.data.answer.forEach(function(vv,ii){
-						var thatIndex = vv.index;
-						var state = true;
-						obj.options.forEach(function(v,i){
-							if(v.index == thatIndex){
-								obj.options[i].num = Number(obj.options[i].num) + 1;
-								state = false;
+				if(value.title == values.data.title){
+					sm[index].data.forEach(function(vv,ii){
+						values.data.answer.forEach(function(aa,bb){
+							if(vv.name == aa.text){
+								sm[index].data[ii].value = Number(sm[index].data[ii].value) + 1;
 							}
 						});
-						if(state == true){
-							obj.options.push({
-								index:thatIndex,
-								num:1,
-								answer:vv.text
-							})
-						}
 					});
 				}
 			});
-			smArr.push(obj);
 		});
-		deferred.resolve(smArr);
 
+		var ssTitle = [];
+		selectSingle.forEach(function(v){
+			ssTitle.push(v.data.title);
+		});
+		ssTitle = _.uniq(ssTitle);
+
+		var ss = [];
+		ssTitle.forEach(function(value){
+			var obj = {
+				title:value,
+				selects:[],
+				data:[]
+			}
+			for(var i=0;i<selectSingle.length;i++){
+				if(value == selectSingle[i].data.title){
+					obj.selects = selectSingle[i].data.selects;
+					obj.selects.forEach(function(vv){
+						obj.data.push({
+							name:vv,
+							value:0
+						});
+					});
+					ss.push(obj);
+					break;
+				}
+			}
+		});
+		ss.forEach(function(value,index){
+			selectSingle.forEach(function(values,indexs){
+				if(value.title == values.data.title){
+					ss[index].data.forEach(function(vv,ii){
+						if(vv.name == values.data.answer.text){
+							ss[index].data[ii].value = Number(ss[index].data[ii].value) + 1;
+						} 
+					});
+				}
+			});
+		});
+
+		var scTitle = [];
+		selectContent.forEach(function(vv){
+			scTitle.push(vv.data.title);
+		});
+		scTitle = _.uniq(scTitle);
+
+		var sc = [];
+		scTitle.forEach(function(value,index){
+			var obj = {
+				title:value,
+				data:[]
+			};
+			selectContent.forEach(function(values,indexs){
+				if(obj.title == values.data.title){
+					obj.data.push(values.data.answer);
+				}
+			});
+			sc.push(obj);
+		});
+
+		result.selectMany = sm;
+		result.selectSingle = ss;
+		result.selectContent = sc;
+
+		deferred.resolve(result);
 		return deferred.promise;
 	}
 }

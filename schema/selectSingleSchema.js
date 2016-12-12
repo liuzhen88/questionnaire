@@ -7,7 +7,9 @@ var questionSchema = new mongoose.Schema({
 		answer:{
 			index:Number,
 			text:String
-		}
+		},
+		total:String,
+		selects:[]
 	},
 	time:String
 });

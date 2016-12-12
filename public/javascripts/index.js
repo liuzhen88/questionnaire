@@ -17,6 +17,7 @@ $(function(){
 			$('.select-many').each(function(index,value){
 				var list = {};
 				list.answer = [];
+				list.selects = [];
 				list.title = $('.select-many-title').eq(index).text();
 				$('.select-many').eq(index).find('input').each(function(i,v){
 					if($(this).is(":checked")){
@@ -25,13 +26,15 @@ $(function(){
 						obj.index = Number(i) + 1;
 						list.answer.push(obj);
 					}
+					list.selects.push($('.select-many').eq(index).find('label').eq(i).text());
 				});
-
+				list.total = $('.select-many').eq(index).find('input').length;
 				data.selectMany.push(list);
 			});
 			$('.select-single').each(function(index,value){
 				var list = {};
 				list.answer = {};
+				list.selects = [];
 				list.title = $('.select-single-title').eq(index).text();
 				$('.select-single').eq(index).find('input').each(function(i,v){
 					if($(this).context.checked == true){
@@ -40,8 +43,9 @@ $(function(){
 						obj.index = Number(i) + 1;
 						list.answer = obj;
 					}
+					list.selects.push($('.select-single').eq(index).find('label').eq(i).text());
 				});
-
+				list.total = $('.select-single').eq(index).find('input').length;
 				data.selectSingle.push(list);
 			});
 			$(".select-content").each(function(index,value){
