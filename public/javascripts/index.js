@@ -68,9 +68,9 @@ $(function(){
 				},
 				success:function(data){
 					if(data.code == '200'){
-						alert('提交成功');
+						alerts('提交成功');
 					}else{
-						alert(data.message);
+						alerts(data.message);
 					}
 				}
 			});
@@ -78,7 +78,7 @@ $(function(){
 		comfirmSubmit:function(cb){
 			var userInfoId = this.request('userinfoid');
 			if(!userInfoId){
-				alert('用户id错误');
+				alerts('用户id错误');
 				return;
 			}else{
 				$.ajax({
@@ -89,7 +89,7 @@ $(function(){
 						if(data.code == '200'){
 							cb();
 						}else{
-							alert(data.message);
+							alerts(data.message);
 						}
 					}
 				});
@@ -115,3 +115,10 @@ $(function(){
 
 	app.init();
 });
+function alerts(obj){
+	$(".phonecall").fadeIn("200");
+	$(".shoa").text(obj);
+}
+$(".disnone").click(function(){
+	$(".phonecall").fadeOut("200");
+})
