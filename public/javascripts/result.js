@@ -45,7 +45,7 @@ $(function(){
 			},
 			series: [
 				{
-					name:name,
+					name:'',
 					type:'pie',
 					radius: ['40%', '50%'],
 					avoidLabelOverlap: false,
