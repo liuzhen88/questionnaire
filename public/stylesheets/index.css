@@ -125,6 +125,24 @@ html,body{
 	padding:6px;
 	color:#FFFFFF;
 	box-sizing:border-box;}
+.bac ul>h2{
+    font-size:20px;
+	padding:8px;
+	width:100%;
+	color:#FFFFFF;
+	background-color:rgba(158,65,67,1.00);
+	margin-bottom:12px;
+}
+.bac ul>p{
+    font-size:16px;
+	padding: 4px 8px;
+	width:100%;
+	color:#FFFFFF;
+	background-color:rgba(119,119,119,1.00);
+	margin-bottom:12px;
+}
+
+
 
 
 

@@ -58,7 +58,7 @@ $(function(){
 		},
 		sendResult:function(data){
 			$.ajax({
-				url:'http://120.25.152.42:9000/users/saveQuestionnaire',
+				url:'http://localhost:9000/users/saveQuestionnaire',
 				type:'post',
 				dataType:'json',
 				data:{
