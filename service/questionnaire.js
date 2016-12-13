@@ -4,6 +4,7 @@ var selectManySchema = require('../schema/selectManySchema');
 var selectSingleSchema = require('../schema/selectSingleSchema');
 var selectContentSchema = require('../schema/selectContentSchema');
 var _ = require('underscore');
+var userSchema = require('../schema/user');
 
 module.exports = {
 	saveQuestionnaire:function(req, res){
@@ -285,6 +286,37 @@ module.exports = {
 		result.selectContent = sc;
 
 		deferred.resolve(result);
+		return deferred.promise;
+	},
+	validate:function(req, res){
+		var deferred = q.defer();
+		var userInfoId = req.query.userInfoId;
+		userSchema.findOne({
+			'username':userInfoId
+		},function(err,docs){
+			if(err){
+				deferred.reject(err);
+			}else{
+				if(docs){
+					var context = config.data.error;
+					deferred.resolve(context);
+				}else{
+					var userModel = new userSchema({
+						username:userInfoId,
+						time:new Date().getTime()
+					});
+					userModel.save(function(err){
+						if(err){
+							deferred.reject(err);
+						}else{
+							var cont = config.data.success;
+							deferred.resolve(cont);
+						}
+					});
+				}
+			}
+		});
+
 		return deferred.promise;
 	}
 }

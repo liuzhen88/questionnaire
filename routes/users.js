@@ -22,4 +22,14 @@ router.get('/countQuestionResult',function(req,res,next){
 	});
 });
 
+router.get('/validate',function(req,res){
+	questionnaire.validate(req,res)
+	.then(function(data){
+		res.send(data);
+	})
+	.fail(function(err){
+		res.send(err);
+	});
+});
+
 module.exports = router;

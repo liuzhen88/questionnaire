@@ -3,8 +3,10 @@ $(function(){
 		init:function(){
 			var _this = this;
 			$('#sumbit').click(function(){
-				_this.getSubmitData(function(result){
-					_this.sendResult(result);
+				_this.comfirmSubmit(function(){
+					_this.getSubmitData(function(result){
+						_this.sendResult(result);
+					});
 				});
 			});
 		},
@@ -58,7 +60,7 @@ $(function(){
 		},
 		sendResult:function(data){
 			$.ajax({
-				url:'http://localhost:9000/users/saveQuestionnaire',
+				url:'http://120.25.152.42:9000/users/saveQuestionnaire',
 				type:'post',
 				dataType:'json',
 				data:{
@@ -72,6 +74,42 @@ $(function(){
 					}
 				}
 			});
+		},
+		comfirmSubmit:function(cb){
+			var userInfoId = this.request('userinfoid');
+			if(!userInfoId){
+				alert('用户id错误');
+				return;
+			}else{
+				$.ajax({
+					url:'http://120.25.152.42:9000/users/validate?userInfoId='+userInfoId,
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						if(data.code == '200'){
+							cb();
+						}else{
+							alert(data.message);
+						}
+					}
+				});
+			}
+
+		},
+		request:function(paras) {
+		    var url = location.href;
+		    url = decodeURI(url);
+		    var paraString = url.substring(url.indexOf("?") + 1, url.length).split("&");
+		    var paraObj = {};
+		    for (var i = 0; j = paraString[i]; i++) {
+		        paraObj[j.substring(0, j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=") + 1, j.length);
+		    }
+		    var returnValue = paraObj[paras.toLowerCase()];
+		    if (typeof(returnValue) == "undefined") {
+		        return "";
+		    } else {
+		        return returnValue;
+		    }
 		}
 	}
 

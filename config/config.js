@@ -4,6 +4,10 @@ var config = {
 		success:{
 			code:'200',
 			message:'ok'
+		},
+		error:{
+			code:'80001',
+			message:'您已提交'
 		}
 	}
 }

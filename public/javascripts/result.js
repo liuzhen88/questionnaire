@@ -4,7 +4,7 @@ $(function(){
 	$(".many,.single").css({height:widths});	
 
 	$.ajax({
-		url:'http://localhost:9000/users/countQuestionResult',
+		url:'http://120.25.152.42:9000/users/countQuestionResult',
 		type:'get',
 		dataType:'json',
 		success:function(data){
