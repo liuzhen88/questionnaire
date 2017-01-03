@@ -1,5 +1,5 @@
 var config = {
-	dbUrl:"mongodb://120.25.152.42/questionnaire",
+	dbUrl:"mongodb://120.25.152.42:1717/questionnaire",
 	data:{
 		success:{
 			code:'200',
